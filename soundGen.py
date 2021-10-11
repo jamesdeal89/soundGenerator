@@ -26,7 +26,26 @@ def generateSin(freq, duration, sampleRate, maxAmp):
     return samples
 
 def generateSq(freq, duration, sampleRate, maxAmp):
-    pass
+    samples = []
+    switcher = False
+    counter = 0
+    for i in range(0,duration * sampleRate):
+        if switcher == False:
+            x = 0
+            if counter < freq:
+                counter +=1
+            elif counter >= freq:
+                switcher = True
+                counter = 0
+        elif switcher == True:
+            x = 255
+            if counter < freq:
+                counter +=1
+            elif counter >= freq:
+                switcher = False
+                counter = 0
+        samples.append(x)
+    return samples
 
 def generateTri(freq, duration, sampleRate, maxAmp):
     samples = []
@@ -81,4 +100,4 @@ def save(fname, samples):
 
 
 
-save("test.wav",generateTri(440,5,44100,255))
+save("test.wav",generateSq(440,5,44100,255))
