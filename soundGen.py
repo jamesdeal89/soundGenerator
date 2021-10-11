@@ -32,16 +32,16 @@ def generateSq(freq, duration, sampleRate, maxAmp):
     for i in range(0,duration * sampleRate):
         if switcher == False:
             x = 0
-            if counter < freq:
+            if counter < sampleRate/freq:
                 counter +=1
-            elif counter >= freq:
+            elif counter >= sampleRate/freq:
                 switcher = True
                 counter = 0
         elif switcher == True:
             x = 255
-            if counter < freq:
+            if counter < sampleRate/freq:
                 counter +=1
-            elif counter >= freq:
+            elif counter >= sampleRate/freq:
                 switcher = False
                 counter = 0
         samples.append(x)
