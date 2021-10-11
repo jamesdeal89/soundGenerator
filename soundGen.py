@@ -24,21 +24,30 @@ def generateSin(freq, duration, sampleRate, maxAmp):
         # appending the sin'ed looping value to the samples list
         samples.append(y)
     return samples
-    
-
-
-        
-        
-    return samples
 
 def generateSq(freq, duration, sampleRate, maxAmp):
     pass
 
 def generateTri(freq, duration, sampleRate, maxAmp):
-    pass
+    samples = []
+    for i in range(0, duration * sampleRate):
+        x = i % (sampleRate/freq)
+        x /= (sampleRate/freq)
+        if x < 0.5:
+            y = int(2*x*maxAmp)
+        else:
+            y = 2*maxAmp-int(2*x*maxAmp)
+        samples.append(y)
+    return samples
 
 def generateSaw(freq, duration, sampleRate, maxAmp):
-    pass
+    samples = []
+    for i in range(0, duration * sampleRate):
+        x = i % (sampleRate/freq)
+        x/= (sampleRate/freq)
+        y=int(x*255)
+        samples.append(y)
+    return samples
 
 
 def save(fname, samples):
@@ -72,4 +81,4 @@ def save(fname, samples):
 
 
 
-save("test.wav",generateSin(1,10,44100,255))
+save("test.wav",generateTri(440,5,44100,255))
